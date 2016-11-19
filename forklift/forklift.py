@@ -2,6 +2,7 @@
 
 import os
 import sys
+from sys import stdout
 import shutil
 import hashlib
 from tempfile import NamedTemporaryFile
@@ -13,7 +14,9 @@ else:
     from urlparse import urlparse
 
 
-def download_file(outputdir, url, filename, md5hash=None):
+
+
+def download_file(outputdir, url, filename, md5hash=None, progress=True):
     """ Download data file from a URL
 
         IMPROVE it to automatically extract gz files
@@ -38,6 +41,9 @@ def download_file(outputdir, url, filename, md5hash=None):
 
     remote = urlopen(src)
 
+    file_size = int(remote.headers["Content-Length"])
+    print("Downloading: %s (%d bytes)" % (filename, file_size))
+
     with NamedTemporaryFile(delete=False) as f:
         try:
             bytes_read = 0
@@ -45,6 +51,15 @@ def download_file(outputdir, url, filename, md5hash=None):
                 f.write(block)
                 md5.update(block)
                 bytes_read += len(block)
+
+                if progress:
+                    status = "\r%10d [%6.2f%%]" % (
+                            bytes_read, bytes_read*100.0/file_size)
+                    stdout.write(status)
+                    stdout.flush()
+            if progress:
+                print('')
+
             if md5hash is not None:
                 assert md5hash == md5.hexdigest()
         except:
