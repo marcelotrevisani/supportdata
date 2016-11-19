@@ -3,6 +3,7 @@
 import os
 import sys
 import shutil
+import hashlib
 from tempfile import NamedTemporaryFile
 if sys.version_info >= (3, 0):
     from urllib.request import urlopen
@@ -17,17 +18,14 @@ def download_file(outputdir, url, filename, md5hash=None):
 
         IMPROVE it to automatically extract gz files
     """
+    block_size = 65536
+
     assert os.path.exists(outputdir)
-
-    download_block_size = 2 ** 16
-
-    #assert type(md5hash) is str
-
-    #hash = hashlib.md5()
 
     src = os.path.join(url, filename)
     fname = os.path.join(outputdir, filename)
 
+    md5 = hashlib.md5()
     #fname = os.path.join(outputdir, os.path.basename(urlparse(url).path))
     #if os.path.isfile(fname):
     #    h = hashlib.md5(open(fname, 'rb').read()).hexdigest()
@@ -43,12 +41,12 @@ def download_file(outputdir, url, filename, md5hash=None):
     with NamedTemporaryFile(delete=False) as f:
         try:
             bytes_read = 0
-            block = remote.read(download_block_size)
-            while block:
+            for block in iter(lambda: remote.read(block_size), ''):
                 f.write(block)
-                #hash.update(block)
+                md5.update(block)
                 bytes_read += len(block)
-                block = remote.read(download_block_size)
+            if md5hash is not None:
+                assert md5hash == md5.hexdigest()
         except:
             if os.path.exists(f.name):
                 os.remove(f.name)
