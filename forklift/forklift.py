@@ -39,40 +39,35 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
     file_size = int(remote.headers["Content-Length"])
     print("Downloading: %s (%d bytes)" % (filename, file_size))
 
-    with NamedTemporaryFile(delete=False) as f:
-        try:
-            bytes_read = 0
-            for block in iter(lambda: remote.read(block_size), ''):
-                f.write(block)
-                md5.update(block)
-                bytes_read += len(block)
+    with NamedTemporaryFile(delete=True) as f:
+        bytes_read = 0
+        for block in iter(lambda: remote.read(block_size), ''):
+            f.write(block)
+            md5.update(block)
+            bytes_read += len(block)
 
-                if progress:
-                    status = "\r%10d [%6.2f%%]" % (
-                            bytes_read, bytes_read*100.0/file_size)
-                    stdout.write(status)
-                    stdout.flush()
             if progress:
-                print('')
+                status = "\r%10d [%6.2f%%]" % (
+                        bytes_read, bytes_read*100.0/file_size)
+                stdout.write(status)
+                stdout.flush()
+        if progress:
+            print('')
 
-            if md5hash is not None:
-                assert md5hash == md5.hexdigest(), \
-                        "Downloaded file (%s) doesn't match expected hash (%s)" % \
-                        (filename, md5hash)
+        if md5hash is not None:
+            assert md5hash == md5.hexdigest(), \
+                    "Downloaded file (%s) doesn't match expected hash (%s)" % \
+                    (filename, md5hash)
 
-            if url[-3:] == '.gz':
-                fname = fname.replace('.gz','')
-                with open(fname, 'wb') as fout:
-                    fgz = gzip.open(f.name, 'rb')
-                    for block in iter(lambda: fgz.read(block_size), ''):
-                        fout.write(block)
-            else:
-                shutil.copy(f.name, fname)
-            print("Downloaded: %s" % fname)
-        except:
-            if os.path.exists(f.name):
-                os.remove(f.name)
-                raise
+        if url[-3:] == '.gz':
+            fname = fname.replace('.gz','')
+            with open(fname, 'wb') as fout:
+                fgz = gzip.open(f.name, 'rb')
+                for block in iter(lambda: fgz.read(block_size), ''):
+                    fout.write(block)
+        else:
+            shutil.copy(f.name, fname)
+        print("Downloaded: %s" % fname)
 
     #h = hash.hexdigest()
     #if h != md5hash:
