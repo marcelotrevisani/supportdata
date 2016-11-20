@@ -27,7 +27,6 @@ setup(
     ],
     package_dir={'forklift':
                  'forklift'},
-    },
     include_package_data=True,
     install_requires=requirements,
     license="BSD license",
