@@ -16,7 +16,7 @@ requirements = [
 
 setup(
     name='supportdata',
-    version='0.0.1',
+    version='0.0.2',
     description="Download support data for Python pacakges, like sample data for tests and binary databases.",
     long_description=readme + '\n\n' + history,
     author="Guilherme Castelão",
@@ -33,7 +33,7 @@ setup(
     zip_safe=False,
     keywords='supportdata',
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
