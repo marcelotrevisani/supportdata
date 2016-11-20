@@ -59,6 +59,16 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
                 assert md5hash == md5.hexdigest(), \
                         "Downloaded file (%s) doesn't match expected hash (%s)" % \
                         (filename, md5hash)
+
+            if url[-3:] == '.gz':
+                fname = fname.replace('.gz','')
+                with open(fname, 'wb') as fout:
+                    fgz = gzip.open(f.name, 'rb')
+                    for block in iter(lambda: fgz.read(block_size), ''):
+                        fout.write(block)
+            else:
+                shutil.copy(f.name, fname)
+            print("Downloaded: %s" % fname)
         except:
             if os.path.exists(f.name):
                 os.remove(f.name)
@@ -71,5 +81,3 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
     #    assert False, "Downloaded file (%s) doesn't match with expected hash (%s)" % \
     #            (fname, md5hash)
 
-    shutil.move(f.name, fname)
-    print("Downloaded: %s" % fname)
