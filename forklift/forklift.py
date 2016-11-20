@@ -56,7 +56,9 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
                 print('')
 
             if md5hash is not None:
-                assert md5hash == md5.hexdigest()
+                assert md5hash == md5.hexdigest(), \
+                        "Downloaded file (%s) doesn't match expected hash (%s)" % \
+                        (filename, md5hash)
         except:
             if os.path.exists(f.name):
                 os.remove(f.name)
