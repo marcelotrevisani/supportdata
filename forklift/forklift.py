@@ -6,12 +6,7 @@ from sys import stdout
 import shutil
 import hashlib
 from tempfile import NamedTemporaryFile
-if sys.version_info >= (3, 0):
-    from urllib.request import urlopen
-    from urllib.parse import urlparse
-else:
-    from urllib2 import urlopen
-    from urlparse import urlparse
+from six.moves.urllib.request import urlopen
 
 
 
