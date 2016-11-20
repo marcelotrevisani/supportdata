@@ -9,9 +9,7 @@ from tempfile import NamedTemporaryFile
 from six.moves.urllib.request import urlopen
 
 
-
-
-def download_file(outputdir, url, filename, md5hash=None, progress=True):
+def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
     """ Download data file from a URL
 
         IMPROVE it to automatically extract gz files
@@ -20,6 +18,8 @@ def download_file(outputdir, url, filename, md5hash=None, progress=True):
 
     assert os.path.exists(outputdir)
 
+    if filename == None:
+        filename = os.path.basename(url)
     src = os.path.join(url, filename)
     fname = os.path.join(outputdir, filename)
 
