@@ -1,20 +1,20 @@
 ===============================
-forklift
+supportdata
 ===============================
 
 
-.. image:: https://img.shields.io/pypi/v/forklift.svg
-        :target: https://pypi.python.org/pypi/forklift
+.. image:: https://img.shields.io/pypi/v/supportdata.svg
+        :target: https://pypi.python.org/pypi/supportdata
 
-.. image:: https://img.shields.io/travis/castelao/forklift.svg
-        :target: https://travis-ci.org/castelao/forklift
+.. image:: https://img.shields.io/travis/castelao/supportdata.svg
+        :target: https://travis-ci.org/castelao/supportdata
 
-.. image:: https://readthedocs.org/projects/forklift/badge/?version=latest
-        :target: https://forklift.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/supportdata/badge/?version=latest
+        :target: https://supportdata.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/castelao/forklift/shield.svg
-     :target: https://pyup.io/repos/github/castelao/forklift/
+.. image:: https://pyup.io/repos/github/castelao/supportdata/shield.svg
+     :target: https://pyup.io/repos/github/castelao/supportdata/
      :alt: Updates
 
 
@@ -22,7 +22,7 @@ Download support data for Python pacakges, like sample data for tests and binary
 
 
 * Free software: BSD license
-* Documentation: https://forklift.readthedocs.io.
+* Documentation: https://supportdata.readthedocs.io.
 
 
 Features

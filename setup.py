@@ -15,23 +15,23 @@ requirements = [
 ]
 
 setup(
-    name='forklift',
+    name='supportdata',
     version='0.0.1',
     description="Download support data for Python pacakges, like sample data for tests and binary databases.",
     long_description=readme + '\n\n' + history,
     author="Guilherme Castelão",
     author_email='guilherme@castelao.net',
-    url='https://github.com/castelao/forklift',
+    url='https://github.com/castelao/supportdata',
     packages=[
-        'forklift',
+        'supportdata',
     ],
-    package_dir={'forklift':
-                 'forklift'},
+    package_dir={'supportdata':
+                 'supportdata'},
     include_package_data=True,
     install_requires=requirements,
     license="BSD license",
     zip_safe=False,
-    keywords='forklift',
+    keywords='supportdata',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
