@@ -20,7 +20,6 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
 
     if filename == None:
         filename = os.path.basename(url)
-    src = os.path.join(url, filename)
     fname = os.path.join(outputdir, filename)
 
     md5 = hashlib.md5()
@@ -34,7 +33,7 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
     #        assert False, "%s already exist but doesn't match the hash: %s" % \
     #                (fname, md5hash)
 
-    remote = urlopen(src)
+    remote = urlopen(url)
 
     file_size = int(remote.headers["Content-Length"])
     print("Downloading: %s (%d bytes)" % (filename, file_size))
