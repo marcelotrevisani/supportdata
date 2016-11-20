@@ -58,6 +58,7 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
                         "Downloaded file (%s) doesn't match expected hash (%s)" % \
                         (filename, md5hash)
 
+            f.seek(0)
             if url[-3:] == '.gz':
                 fname = fname.replace('.gz','')
                 with open(fname, 'wb') as fout:
