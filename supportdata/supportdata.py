@@ -18,7 +18,9 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
     """
     block_size = 65536
 
-    assert os.path.exists(outputdir)
+    if not os.path.exists(outputdir):
+        os.makedirs(outputdir)
+    #assert os.path.exists(outputdir)
 
     if filename == None:
         filename = os.path.basename(url)
