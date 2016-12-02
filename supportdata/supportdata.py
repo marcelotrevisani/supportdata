@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
+
 import os
 import sys
 from sys import stdout
@@ -42,7 +44,7 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
 
         with NamedTemporaryFile(delete=True) as f:
             bytes_read = 0
-            for block in iter(lambda: remote.read(block_size), ''):
+            for block in iter(lambda: remote.read(block_size), b''):
                 f.write(block)
                 md5.update(block)
                 bytes_read += len(block)
