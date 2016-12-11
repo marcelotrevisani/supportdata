@@ -42,8 +42,12 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
 
         remote = urlopen(url)
 
-        file_size = int(remote.headers["Content-Length"])
-        print("Downloading: %s (%d bytes)" % (filename, file_size))
+        try:
+            file_size = int(remote.headers["Content-Length"])
+            print("Downloading: %s (%d bytes)" % (filename, file_size))
+        except:
+            file_size = 1e30
+            print("Downloading unknown size file")
 
         with NamedTemporaryFile(delete=True) as f:
             bytes_read = 0
