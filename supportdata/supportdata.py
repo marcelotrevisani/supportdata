@@ -8,6 +8,7 @@ from sys import stdout
 import shutil
 import hashlib
 from tempfile import NamedTemporaryFile
+import gzip
 
 from six.moves.urllib.request import urlopen
 from filelock import FileLock
@@ -26,6 +27,8 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
 
     if filename == None:
         filename = os.path.basename(url)
+        if filename[-3:] == '.gz':
+            filename = filename[:-3]
     fname = os.path.join(outputdir, filename)
 
     flock = "%s.lock" % fname
@@ -64,7 +67,6 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
 
             f.seek(0)
             if url[-3:] == '.gz':
-                fname = fname.replace('.gz','')
                 with open(fname, 'wb') as fout:
                     fgz = gzip.open(f.name, 'rb')
                     for block in iter(lambda: fgz.read(block_size), ''):
