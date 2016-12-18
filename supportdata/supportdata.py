@@ -24,7 +24,7 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
         os.makedirs(outputdir)
     #assert os.path.exists(outputdir)
 
-    if filename == None:
+    if filename is None:
         filename = os.path.basename(url)
         if filename[-3:] == '.gz':
             filename = filename[:-3]
@@ -32,7 +32,7 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
 
     flock = "%s.lock" % fname
     lock = FileLock(flock)
-    with lock.acquire(timeout = 900):
+    with lock.acquire(timeout=900):
         if os.path.isfile(fname):
             print('Already downloaded')
             return
