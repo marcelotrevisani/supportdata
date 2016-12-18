@@ -18,7 +18,7 @@ supportdata
      :alt: Updates
 
 
-Download support data for Python pacakges, like sample data for tests and binary databases.
+Download support data for Python packages, like sample data for tests and binary databases.
 
 
 * Free software: BSD license
