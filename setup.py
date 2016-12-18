@@ -2,17 +2,16 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup
+from codecs import open
 
-with open('README.rst') as readme_file:
-    readme = readme_file.read()
+with open('README.rst', encoding='utf-8') as f:
+    readme = f.read()
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
+with open('HISTORY.rst', encoding='utf-8') as f:
+    history = f.read().replace('.. :changelog:', '')
 
-requirements = [
-    'six>=1.5.2',
-    'filelock>=2.0'
-]
+with open('requirements.txt', encoding='utf-8') as f:
+    requirements = f.read()
 
 setup(
     name='supportdata',
