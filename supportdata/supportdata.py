@@ -3,7 +3,6 @@
 from __future__ import unicode_literals
 
 import os
-import sys
 from sys import stdout
 import shutil
 import hashlib
