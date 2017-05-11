@@ -10,6 +10,7 @@ from tempfile import NamedTemporaryFile
 import gzip
 
 from six.moves.urllib.request import urlopen
+from six.moves.urllib.parse import urlsplit
 from filelock import FileLock
 
 
@@ -24,10 +25,21 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
         os.makedirs(outputdir)
     #assert os.path.exists(outputdir)
 
+    isgzfile = False
+
+    remote_filename = os.path.basename(urlsplit(url)[2])
+    if remote_filename[-3:] == '.gz':
+        isgzfile = True
+
     if filename is None:
-        filename = os.path.basename(url)
-        if filename[-3:] == '.gz':
-            filename = filename[:-3]
+        if isgzfile:
+            filename = remote_filename[:-3]
+        else:
+            filename = remote_filename
+    elif filename[-3:] == '.gz':
+        # Take it back. Looks like the user wants to save a gzipped file
+        isgzfile = False
+
     fname = os.path.join(outputdir, filename)
     flock = os.path.join(outputdir, ".%s.lock" % filename)
 
@@ -68,7 +80,8 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
                         "(md5 hash: %s)" % (filename, md5.hexdigest())
 
             f.seek(0)
-            if url[-3:] == '.gz':
+            if isgzfile:
+                print('Decompressing downloaded file')
                 with open(fname, 'wb') as fout:
                     fgz = gzip.GzipFile(f.name, 'rb')
                     for block in iter(lambda: fgz.read(block_size), b''):
