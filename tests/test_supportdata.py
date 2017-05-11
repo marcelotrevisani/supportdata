@@ -16,7 +16,7 @@ def test_download_file_nooutput():
         download_file('non/existent/path', url=None, filename=None)
     except:
         return
-    assert False, "download_file should file if invalid output path"
+    assert False, "download_file should fail if output path is invalid"
 
 
 def test_download_file():
