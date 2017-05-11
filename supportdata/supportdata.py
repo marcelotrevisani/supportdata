@@ -29,8 +29,8 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
         if filename[-3:] == '.gz':
             filename = filename[:-3]
     fname = os.path.join(outputdir, filename)
+    flock = os.path.join(outputdir, ".%s.lock" % filename)
 
-    flock = "%s.lock" % fname
     lock = FileLock(flock)
     with lock.acquire(timeout=900):
         if os.path.isfile(fname):
