@@ -29,9 +29,9 @@ def test_download_file():
     os.remove(filename)
 
 
-def download_file_md5():
+def test_download_file_md5():
     url = "https://raw.githubusercontent.com/castelao/supportdata/master/LICENSE"
-    md5hash = "68153c4036be9d8b8abd02011b5271ff"
+    md5hash = "bcc8d2a90ed7d99dc34a3d6938bd672d"
 
     download_file(tempfile.gettempdir(), url, 'LICENSE', md5hash)
     output = os.path.join(tempfile.gettempdir(), 'LICENSE')
