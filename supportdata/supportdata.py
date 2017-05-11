@@ -70,8 +70,8 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
             f.seek(0)
             if url[-3:] == '.gz':
                 with open(fname, 'wb') as fout:
-                    fgz = gzip.open(f.name, 'rb')
-                    for block in iter(lambda: fgz.read(block_size), ''):
+                    fgz = gzip.GzipFile(f.name, 'rb')
+                    for block in iter(lambda: fgz.read(block_size), b''):
                         fout.write(block)
             else:
                 shutil.copy(f.name, fname)
