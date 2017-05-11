@@ -64,8 +64,8 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
 
             if md5hash is not None:
                 assert md5hash == md5.hexdigest(), \
-                        "Downloaded file (%s) doesn't match expected hash (%s)" % \
-                        (filename, md5hash)
+                        "Downloaded file (%s) doesn't match expected content" \
+                        "(md5 hash: %s)" % (filename, md5.hexdigest())
 
             f.seek(0)
             if url[-3:] == '.gz':
