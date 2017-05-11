@@ -18,7 +18,7 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
 
         IMPROVE it to automatically extract gz files
     """
-    block_size = 65536
+    block_size = 131072
 
     if not os.path.exists(outputdir):
         os.makedirs(outputdir)
