@@ -89,11 +89,3 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
             else:
                 shutil.copy(f.name, fname)
             print("Downloaded: %s" % fname)
-
-    #h = hash.hexdigest()
-    #if h != md5hash:
-    #    os.remove(f.name)
-    #    print("Downloaded file doesn't match. %s" % h)
-    #    assert False, "Downloaded file (%s) doesn't match with expected hash (%s)" % \
-    #            (fname, md5hash)
-
