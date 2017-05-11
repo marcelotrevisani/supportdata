@@ -34,7 +34,6 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
     lock = FileLock(flock)
     with lock.acquire(timeout=900):
         if os.path.isfile(fname):
-            print('Already downloaded')
             return
 
         md5 = hashlib.md5()
