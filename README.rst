@@ -3,6 +3,9 @@ supportdata
 ===============================
 
 
+.. image:: https://zenodo.org/badge/74218542.svg
+   :target: https://zenodo.org/badge/latestdoi/74218542
+
 .. image:: https://img.shields.io/pypi/v/supportdata.svg
         :target: https://pypi.python.org/pypi/supportdata
 
