@@ -7,7 +7,8 @@ from sys import stdout
 import shutil
 import hashlib
 from tempfile import NamedTemporaryFile
-import gzip
+from gzip import GzipFile
+from zipfile import ZipFile
 
 from six.moves.urllib.request import urlopen
 from six.moves.urllib.parse import urlsplit
@@ -26,10 +27,13 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
     #assert os.path.exists(outputdir)
 
     isgzfile = False
+    iszipfile = False
 
     remote_filename = os.path.basename(urlsplit(url)[2])
     if remote_filename[-3:] == '.gz':
         isgzfile = True
+    elif remote_filename[-4:] == '.zip':
+        iszipfile = True
 
     if filename is None:
         if isgzfile:
@@ -79,12 +83,15 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
                         "Downloaded file (%s) doesn't match expected content" \
                         "(md5 hash: %s)" % (filename, md5.hexdigest())
 
-            f.seek(0)
-            if isgzfile:
+            if isgzfile or iszipfile:
+                f.seek(0)
                 print('Decompressing downloaded file')
+                if isgzfile:
+                    fz = GzipFile(f.name, 'rb')
+                elif iszipfile:
+                    fz = ZipFile(f.name, 'rb')
                 with open(fname, 'wb') as fout:
-                    fgz = gzip.GzipFile(f.name, 'rb')
-                    for block in iter(lambda: fgz.read(block_size), b''):
+                    for block in iter(lambda: fz.read(block_size), b''):
                         fout.write(block)
             else:
                 shutil.copy(f.name, fname)
