@@ -45,13 +45,12 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
         isgzfile = False
 
     fname = os.path.join(outputdir, filename)
-    flock = os.path.join(outputdir, ".%s.lock" % filename)
+    if os.path.isfile(fname):
+        return
 
+    flock = os.path.join(outputdir, ".%s.lock" % filename)
     lock = FileLock(flock)
     with lock.acquire(timeout=900):
-        if os.path.isfile(fname):
-            return
-
         md5 = hashlib.md5()
 
         remote = urlopen(url)
