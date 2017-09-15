@@ -46,7 +46,7 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
 
     fname = os.path.join(outputdir, filename)
     if os.path.isfile(fname):
-        return
+        return fname
 
     flock = os.path.join(outputdir, ".%s.lock" % filename)
     lock = FileLock(flock)
@@ -94,4 +94,6 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
                         fout.write(block)
             else:
                 shutil.copy(f.name, fname)
-            print("Downloaded: %s" % fname)
+
+    print("Downloaded: %s" % fname)
+    return fname
