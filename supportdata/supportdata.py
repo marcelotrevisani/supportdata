@@ -18,7 +18,12 @@ from filelock import FileLock
 def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
     """ Download data file from a URL
 
-        IMPROVE it to automatically extract gz files
+        outputdir: Where to save the downloaded file.
+        url: Source URL, what to download.
+        filename: Save downloaded file as this name. If not given, uses the
+          original name from the url.
+        md5hash: If given, check if the downloaded file match with the expected
+          hash.
     """
     block_size = 131072
 
