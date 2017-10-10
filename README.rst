@@ -36,4 +36,4 @@ Features
 Credits
 -------
 
-This package was initially based in some functionalities that I wrote for CoTeDe& OceansDB, and later adopted some good ideas from astropy and bokeh.
+This package was initially based in some functionalities that I wrote for CoTeDe & OceansDB, and later adopted some good ideas from astropy and bokeh.
