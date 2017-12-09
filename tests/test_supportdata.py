@@ -29,6 +29,23 @@ def test_download_file():
     os.remove(filename)
 
 
+def test_download_WOA():
+    """ Test with a regular netCDF
+
+        In response to BUG #1.
+    """
+    url = "https://data.nodc.noaa.gov/thredds/fileServer/woa/WOA13/DATAv2/temperature/netcdf/decav/5deg/woa13_decav_t13_5dv2.nc"
+    filename = 'woa13_decav_t13_5dv2.nc'
+    download_file(
+            outputdir=tempfile.gettempdir(),
+            url=url,
+            filename=filename,
+            md5hash='1ebaa01367a2d5f99d74ff1d37466c11')
+    filename = os.path.join(tempfile.gettempdir(), filename)
+    assert os.path.exists(filename)
+    os.remove(filename)
+
+
 def test_download_CARS():
     """ Test with a large gz file
 
