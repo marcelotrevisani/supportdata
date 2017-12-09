@@ -32,7 +32,8 @@ def test_download_file():
 def test_download_WOA():
     """ Test with a regular netCDF
 
-        In response to BUG #1.
+        In response to BUG #1. On Python-2 the temporary file was truncated,
+          requiring a flush before being copied to the final position.
     """
     url = "https://data.nodc.noaa.gov/thredds/fileServer/woa/WOA13/DATAv2/temperature/netcdf/decav/5deg/woa13_decav_t13_5dv2.nc"
     filename = 'woa13_decav_t13_5dv2.nc'

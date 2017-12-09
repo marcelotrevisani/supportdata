@@ -15,7 +15,7 @@ with open('requirements.txt', encoding='utf-8') as f:
 
 setup(
     name='supportdata',
-    version='0.1.1',
+    version='0.1.2',
     description="Download support data for Python pacakges, like sample data for tests and binary databases.",
     long_description=readme + '\n\n' + history,
     author="Guilherme Castelão",

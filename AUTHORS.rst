@@ -10,4 +10,4 @@ Development Lead
 Contributors
 ------------
 
-None yet. Why not be the first?
+@sgartzman: Reported bug #8 on OceansDB, which was caused by the bug #1 here.
