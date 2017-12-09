@@ -79,6 +79,7 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
                             bytes_read, bytes_read*100.0/file_size)
                     stdout.write(status)
                     stdout.flush()
+            f.flush()
             if progress:
                 print('')
 
