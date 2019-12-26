@@ -55,6 +55,9 @@ def test_download_CARS():
 
         Maybe change this test in the future to use another file, but still
           I should use a large gzipped file.
+
+        Using progress to keep it alive. This is a large file with a slow
+          server.
     """
     url = "http://www.marine.csiro.au/atlas/export/temperature_cars2009a.nc.gz"
     filename = 'temperature_cars2009a.nc'
@@ -62,7 +65,8 @@ def test_download_CARS():
             outputdir=tempfile.gettempdir(),
             url=url,
             filename=filename,
-            md5hash='a310418e6c36751f2f9e9e641905d503')
+            md5hash='a310418e6c36751f2f9e9e641905d503',
+            progress=True)
     filename = os.path.join(tempfile.gettempdir(), filename)
     assert os.path.exists(filename)
     os.remove(filename)
