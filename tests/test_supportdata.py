@@ -35,13 +35,13 @@ def test_download_WOA():
         In response to BUG #1. On Python-2 the temporary file was truncated,
           requiring a flush before being copied to the final position.
     """
-    url = "https://data.nodc.noaa.gov/thredds/fileServer/woa/WOA13/DATAv2/temperature/netcdf/decav/5deg/woa13_decav_t13_5dv2.nc"
-    filename = 'woa13_decav_t13_5dv2.nc'
+    url = "https://data.nodc.noaa.gov/woa/WOA18/DATA/temperature/netcdf/decav/5deg/woa18_decav_t00_5d.nc"
+    filename = 'woa18_decav_t00_5d.nc'
     download_file(
             outputdir=tempfile.gettempdir(),
             url=url,
             filename=filename,
-            md5hash='1ebaa01367a2d5f99d74ff1d37466c11')
+            md5hash='0f4fe0fc9a32174b8a24d0630af8e457')
     filename = os.path.join(tempfile.gettempdir(), filename)
     assert os.path.exists(filename)
     os.remove(filename)
