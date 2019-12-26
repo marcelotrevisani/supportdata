@@ -88,18 +88,20 @@ def download_file(outputdir, url, filename=None, md5hash=None, progress=True):
                         "Downloaded file (%s) doesn't match expected content" \
                         "(md5 hash: %s)" % (filename, md5.hexdigest())
 
-            if isgzfile or iszipfile:
-                f.seek(0)
-                print('Decompressing downloaded file')
-                if isgzfile:
-                    fz = GzipFile(f.name, 'rb')
-                elif iszipfile:
-                    fz = ZipFile(f.name, 'rb')
-                with open(fname, 'wb') as fout:
-                    for block in iter(lambda: fz.read(block_size), b''):
-                        fout.write(block)
+            f.seek(0)
+            if isgzfile:
+                print('Decompressing (gz) downloaded file')
+                ftmp = GzipFile(f.name, 'rb')
+            elif iszipfile:
+                print('Decompressing (zip) downloaded file')
+                ftmp = ZipFile(f.name, 'rb')
+            # Windows is not happy with copying f, so we need to read and
+            #   write everything in the output file.
             else:
-                shutil.copy(f.name, fname)
+                ftmp = f
+            with open(fname, 'wb') as fout:
+                for block in iter(lambda: ftmp.read(block_size), b''):
+                    fout.write(block)
 
     print("Downloaded: %s" % fname)
     return fname
