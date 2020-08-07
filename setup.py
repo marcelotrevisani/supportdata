@@ -11,7 +11,7 @@ with open('HISTORY.rst', encoding='utf-8') as f:
     history = f.read().replace('.. :changelog:', '')
 
 with open('requirements.txt', encoding='utf-8') as f:
-    requirements = f.readlines()
+    requirements = [l.strip() for l in f.readlines() if l.strip()]
 
 setup(
     name='supportdata',
